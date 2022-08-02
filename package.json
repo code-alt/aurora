@@ -1,0 +1,25 @@
+{
+  "name": "oasis",
+  "version": "1.0.0",
+  "description": "My homepage running on GitHub Pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-alt/altdevs.xyz.git"
+  },
+  "keywords": [],
+  "author": "code-alt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code-alt/altdevs.xyz/issues"
+  },
+  "homepage": "https://github.com/code-alt/altdevs.xyz#readme",
+  "dependencies": {
+    "@tomphttp/bare-server-node": "^1.0.3-deps2",
+    "node-static": "^0.7.11"
+  }
+}

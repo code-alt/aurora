@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist');
+
+/* color: rgb(235, 235, 235), old background #0d0905 */
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes transLine {
+   0% {
+    left: calc(50% - 5px);
+    top: calc(50% - 155px)
+   }
+   25% {
+    left: calc(50% + 205px);
+    top: calc(50% - 5px);
+   }
+   50% {
+    left: calc(50% - 5px);
+    top: calc(50% + 155px);
+   }
+   75% {
+    left: calc(50% - 205px);
+    top: calc(50% - 5px);
+   }
+   100% {
+    left: calc(50% - 5px);
+    top: calc(50% - 155px)
+   }
+}
+
+#main {
+  transition: 0.5s;
+}
+
+#start {
+  transition: 0.5s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #0d0905;
+  z-index: 100;
+}
+
+#newPageInputText {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: calc(100% - 300px);
+  background: transparent;
+  color: #fff;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 1.5;
+  padding: 1rem;
+  padding-top: 300px;
+  z-index: 10;
+  scrollbar-width: none;
+  animation: text 3s ease-in-out infinite;
+}
+
+#newPageInputText:focus {
+  outline: none;
+}
+
+.page {
+  position: fixed;
+  top: 20px;
+  left: 120px;
+  width: calc(100% - 140px);
+  height: calc(100% - 40px);
+  border-radius: 20px;
+  background: #0d0905;
+  overflow: auto;
+  transition: 0.5s;
+  border: 0;
+  color: white;
+}
+
+.pane {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+  background: #0d0905;
+  border-radius: 20px;
+  transition: 0.5s;
+  border: 0;
+  z-index: 10001;
+  color: white;
+  padding: 50px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: none;
+}
+
+#line {
+  animation: transLine 2s ease-in-out infinite, vibebox 3s ease-in-out infinite;
+  animation-fill-mode: forwards;
+  position: absolute;
+  transition: 0.5s;
+  background: rgb(150, 233, 150);
+  background: linear-gradient(
+      45deg,
+      rgba(89, 255, 161, 0.75),
+      rgba(164, 144, 255, 0.75),
+      rgba(46, 171, 255, 0.75),
+      rgba(89, 255, 161, 0.75)
+    );
+  background-size: 300%;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  box-shadow: 0 0 10px rgba(46, 171, 255, 0.75);
+}
+
+#newPage, .pane {
+  scrollbar-width: none;
+}
+
+#pageBar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: calc(100vh - 60px);
+  background: rgb(27, 27, 27);
+  border-radius: 20px;
+  padding: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#tabs::-webkit-scrollbar, #pageBar::-webkit-scrollbar, .pane::-webkit-scrollbar {
+  display: none;
+  scrollbar-width: none;
+}
+
+#pageBar, #tabs {
+  scrollbar-width: none;
+}
+
+#newTabPart {
+  position: fixed;
+  transition: 0.5s;
+  width: 60px;
+  top: 20px;
+  left: 20px;
+  padding:10px;
+  height: 200px;
+  background: rgb(27, 27, 27);
+  border-bottom: #151515 3px solid;
+  border-radius: 20px 20px 0 0;
+  z-index: 100;
+}
+
+.newTabBtn::selection {
+  background: rgba(0, 0, 0, 0);
+}
+
+#pageBar .item, #tabs .tab {
+  width: 60px;
+  height: 60px;
+  background: rgb(37, 37, 37);
+  border-radius: 15px;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.15s;
+  color: rgb(235, 235, 235);
+}
+
+.tab::selection, .item::selection {
+  background: rgba(0, 0, 0, 0);
+}
+
+#pageBar .item:hover, #tabs .tab:hover {
+  background: #151515;
+}
+
+#newTab {
+  margin-top: 0 !important;
+}
+
+#newPageText, .txt {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 50px;
+  color: rgb(46, 171, 255);
+  text-shadow: 0 0 10px rgba(46, 171, 255, 0.75);
+  text-align: left;
+  transition: 0.5s;
+  animation: text 3s ease-in-out infinite;
+}
+
+#newPageText p, .txt p, .txt a {
+  font-size: 30px;
+}
+
+#loadText {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(150, 233, 150);
+  animation: text 3s ease-in-out infinite;
+  transition: 0.5s;
+  text-shadow: 0 0 10px rgba(89, 255, 161, 0.75);
+}
+
+#setting, #game {
+  margin-top: 10px !important;
+  padding-top: 7px;
+  font-size: 36px !important;
+  height: 53px !important;
+}
+
+.auto {
+  padding-top: 7px !important;
+  font-size: 36px !important;
+  height: 53px !important;
+}
+
+@media screen and (max-width: 768px) {
+  #newPageText, #newPageText p {
+    font-size: 1.5rem !important;
+  } 
+  #newPageInputText {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #newPageText, #newPageText p {
+    font-size: 1.2rem !important;
+  }
+}
+
+@keyframes text {
+  0% {
+    background: linear-gradient(
+      var(--angle),
+      rgba(89, 255, 161, 0.75),
+      rgba(164, 144, 255, 0.75),
+      rgba(46, 171, 255, 0.75)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(89, 255, 161, 0.75);
+    --angle: 0deg;
+  } 
+  50% {
+    text-shadow: 0 0 10px rgba(164, 144, 255, 0.75);
+    --angle: 180deg;
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(89, 255, 161, 0.75);
+    background: linear-gradient(
+      var(--angle),
+      rgba(89, 255, 161, 0.75),
+      rgba(164, 144, 255, 0.75),
+      rgba(46, 171, 255, 0.75)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    --angle: 360deg;
+  }
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background: #0e0e0e;
+  font-family: "Urbanist", sans-serif;
+}

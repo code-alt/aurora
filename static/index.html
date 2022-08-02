@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oasis</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="example" style="z-index: 1000000;position:fixed;"></div>
+        <div id="start">
+            <div id="loadText">Loading...</div>
+            <div id="line"></div>
+        </div>
+        <div id="specialFrames">
+            <div id="back" style="display:none;position:fixed;z-index:1000;background:rgba(0,0,0,0.5);backdrop-filter:blur(20px);left:0;top:0;width:100%;height:100vh;" onclick="closePane()"></div>
+            <div id="games" class="pane">
+                <div class="txt" id="gameList">
+                    <h5>We have a collection of games, just click on the one you wish to play!</h5>
+                </div>
+            </div>
+            <div id="settings" class="pane">
+                <div class="txt">
+                    Nothing here, yet.
+                </div>
+            </div>
+        </div>
+        <main id="main">
+            <div id="pageBar">
+                <div id="newTabPart">
+                    <div class="item newTabBtn" id="newTab" title="New Tab...">+</div>
+                    <div class="item newTabBtn" id="setting" title="Settings" onclick="goTo('settings')">⚙️</div>
+                    <div class="item newTabBtn" id="game" title="Games" onclick="goTo('games')">🎮</div>
+                </div>
+                <div id="tabs">
+                    <div style="height:210px;width:60px;"></div>
+                    <div class="tab auto" title="Tab" onclick="go(0)">🧭</div>
+                </div>
+            </div>
+            <div id="newPage" class="page">
+                <div id="newPageText">
+                    Welcome to Oasis
+                    <br />
+                    <p>
+                        To start, input a website by typing here and hitting enter.
+                    </p>
+                </div>
+                <div id="newPageInput">
+                    <form id="proxyInp">
+                        <input type="text" id="newPageInputText" placeholder="Enter a website" />
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="uv/uv.bundle.js"></script>
+	<script src="uv/uv.config.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
