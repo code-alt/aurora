@@ -133,7 +133,9 @@ $("#proxyInp").onsubmit = async (e) => {
 currentTab = 0;
 function go(tab) {
     for (var i = 0; i < tabs.length; i++) {
-        $("#" + tabs[i].toString().replace("#", "")).style.display="none";
+				if ($("#" + tabs[i].toString().replace("#", ""))) {
+        	$("#" + tabs[i].toString().replace("#", "")).style.display="none";
+				}
     }
 	var frame = 
     $("#" + tabs[tab].toString().replace("#", ""));
