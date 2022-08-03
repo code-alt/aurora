@@ -43,7 +43,7 @@
   width: 100%;
   height: 100vh;
   background: #0d0905;
-  z-index: 100;
+  z-index: 11000;
 }
 
 #newPageInputText {
@@ -140,6 +140,8 @@
   padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
+  z-index:104;
+  box-shadow: 0px 0px 5px rgb(27, 27, 27);
 }
 
 #tabs::-webkit-scrollbar, #pageBar::-webkit-scrollbar, .pane::-webkit-scrollbar {
@@ -162,7 +164,7 @@
   background: rgb(27, 27, 27);
   border-bottom: #151515 3px solid;
   border-radius: 20px 20px 0 0;
-  z-index: 100;
+  z-index: 105;
 }
 
 .newTabBtn::selection {
@@ -180,6 +182,7 @@
   cursor: pointer;
   transition: 0.15s;
   color: rgb(235, 235, 235);
+  display: inline-block;
 }
 
 .tab::selection, .item::selection {
@@ -192,6 +195,7 @@
 
 #newTab {
   margin-top: 0 !important;
+  margin-left: 0 !important;
 }
 
 #newPageText, .txt {
@@ -291,4 +295,46 @@ html {
   padding: 0;
   background: #0e0e0e;
   font-family: "Urbanist", sans-serif;
+}
+
+.horizontal {
+  bottom: 20px !important;
+  width: calc(100% - 40px) !important;
+  height: 60px !important;
+  overflow-y: hidden !important;
+  overflow-x: scroll !important;
+  display: inline !important;
+}
+
+#cm {
+  position: fixed;
+  width: 300px;
+  height: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  left: -5000px;
+  top: 0;
+  margin:10px;
+  border: 3px solid rgb(50, 50, 50);
+  background: rgb(150, 150, 150);
+  border-radius: 20px;
+  z-index: 10000000;
+}
+
+#cm button, #cm a {
+  display: block;
+  font-size: 18px;
+  width: 100%;
+  font-family: "Urbanist", sans-serif;
+  padding: 10px;
+  border: 0;
+  cursor: pointer;
+  background: rgb(70, 70, 70);
+  transition: 0.25s;
+  text-align: left;
+  color: white;
+}
+
+#cm button:hover, #cm a:hover {
+  background: rgb(60, 60, 60);
 }

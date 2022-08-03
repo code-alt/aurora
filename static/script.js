@@ -11,9 +11,56 @@ window.setTimeout(() => { // load for a bit more, than initialize
     $("#start").style.opacity = "0";
     window.setTimeout(() => {
         $("#start").style.display = "none";
+        $("#start").remove();
     }, 500);
 }, 1500);
 };
+
+var pointerX = 0;
+var pointerY = 0;
+document.onmousemove = function(event) {
+	pointerX = event.pageX;
+	pointerY = event.pageY;
+}
+
+var menu = document.getElementById("cm");
+
+function closep() {
+    menu.style.left = "-50000px";
+}
+
+function removeLet(str) {
+  return str.replace(/\a-z*/g, '');
+}
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  if (pointerY > window.innerHeight - menu.clientHeight + removeLet(menu.style.padding)) {
+    menu.style.top = pointerY - menu.clientHeight - removeLet(menu.style.padding) + "px";
+  } else {
+    menu.style.top = pointerY + "px";
+  }
+  if (pointerX > window.innerWidth - menu.clientWidth - removeLet(menu.style.padding)) {
+    menu.style.left = pointerX - menu.clientWidth - removeLet(menu.style.padding) + "px";
+  } else {
+    menu.style.left = pointerX + "px";
+  }
+});
+
+function closeCurrentTab() {
+    if (tabs.length > 1) {
+    if (tabs[currentTab] != "newPage") {
+        $("#" + tabs[currentTab].toString().replace("#", "")).remove();
+    }
+    document.getElementsByClassName("tab")[currentTab].remove();
+    tabs = tabs.splice(currentTab, 1);
+    currentTab--;
+    go(currentTab);
+    } else {
+        alert("You can't close the last tab");
+    }
+}
+
 
 var totaltabs = 1;
 $("#newTab").onclick = () => {
@@ -32,12 +79,13 @@ $("#newTab").onclick = () => {
 
 var input = $("#newPageInputText");
 $("#proxyInp").onsubmit = async (e) => {
-    e.preventDefault();
-    window.navigator.serviceWorker.register('./sw.js', {
+    e.preventDefault(); 
+	if (input.value.trim()) {
+  window.navigator.serviceWorker.register('./sw.js', {
         scope: __uv$config.prefix
     }).then(() => {
         var frame = document.createElement("iframe");
-        frame.src = __uv$config.prefix + __uv$config.encodeUrl(input.value);
+        frame.src = __uv$config.prefix + __uv$config.encodeUrl("https://" + input.value.replace("https://", "").trim());
         input.value = "";
         frame.className = "page";
         frame.zIndex = "50";
@@ -45,6 +93,7 @@ $("#proxyInp").onsubmit = async (e) => {
         $("#main").appendChild(frame);
         tabs[currentTab] = frame.id.toString();
     });
+	}
 }
 
 currentTab = 0;
@@ -52,8 +101,10 @@ function go(tab) {
     for (var i = 0; i < tabs.length; i++) {
         $("#" + tabs[i].toString().replace("#", "")).style.display="none";
     }
-    $("#" + tabs[tab].toString().replace("#", "")).style.display="initial";
-    $("#" + tabs[tab].toString().replace("#", "")).focus();
+	var frame = 
+    $("#" + tabs[tab].toString().replace("#", ""));
+		frame.style.display="initial";
+    frame.focus();
     currentTab = tab;
 }
 

@@ -15,7 +15,12 @@
     <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="example" style="z-index: 1000000;position:fixed;"></div>
+        <div id="cm">
+            <button class="option" onclick="closeCurrentTab();closep();">Close Tab</butto>
+            <button class="option" onclick="document.getElementById('newTab').click();closep();">Add Tab</button>
+            <button class="option" onclick="goTo('games');closep();">Games</button>
+            <button class="option" onclick="goTo('settings');closep();">Settings</button>
+        </div>
         <div id="start">
             <div id="loadText">Loading...</div>
             <div id="line"></div>
@@ -36,12 +41,12 @@
         <main id="main">
             <div id="pageBar">
                 <div id="newTabPart">
-                    <div class="item newTabBtn" id="newTab" title="New Tab...">+</div>
+                    <div class="item newTabBtn" id="newTab" style="margin: 0 !important;" title="New Tab...">+</div>
                     <div class="item newTabBtn" id="setting" title="Settings" onclick="goTo('settings')">⚙️</div>
                     <div class="item newTabBtn" id="game" title="Games" onclick="goTo('games')">🎮</div>
                 </div>
                 <div id="tabs">
-                    <div style="height:210px;width:60px;"></div>
+                    <div style="height:210px;width:210px;"></div>
                     <div class="tab auto" title="Tab" onclick="go(0)">🧭</div>
                 </div>
             </div>
@@ -60,8 +65,9 @@
                 </div>
             </div>
         </main>
+        <script src="script.js"></script>
         <script src="uv/uv.bundle.js"></script>
 	<script src="uv/uv.config.js"></script>
-        <script src="script.js"></script>
+        
     </body>
 </html>
