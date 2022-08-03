@@ -3,6 +3,38 @@ function $(id) {
     return document.querySelector(id);
 }
 
+if (localStorage.getItem("title") && localStorage.getItem("sc")) {
+	document.title = localStorage.getItem("title");
+	let oldFavicon = undefined;
+	var link = document.createElement('link')
+	link.id = 'favicon';
+	link.type = 'image/x-icon'
+	link.rel = 'icon';
+	link.href = localStorage.getItem("sc");
+	if (oldFavicon) {
+    document.head.removeChild(oldFavicon);
+	}
+	document.head.appendChild(link);
+}
+
+function cloak() {
+	var title = prompt('If you have a title for the tab, input it here, or the title will be "Google Docs"') || "Google Docs";
+	localStorage.setItem("title", title);
+	document.title = localStorage.getItem("title");
+	let oldFavicon = undefined;
+	var link = document.createElement('link')
+	link.id = 'favicon';
+	link.type = 'image/x-icon'
+	link.rel = 'icon';
+	var sc = prompt("If you have a tab icon, input it here, or Google Doc's icon will be used.") || "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico";
+	localStorage.setItem("sc", sc);
+	link.href = localStorage.getItem("sc");
+	if (oldFavicon) {
+    document.head.removeChild(oldFavicon);
+	}
+	document.head.appendChild(link);
+}
+
 var tabs = ["newPage"];
 
 window.onload = () => {
@@ -24,6 +56,8 @@ document.onmousemove = function(event) {
 }
 
 var menu = document.getElementById("cm");
+
+window.onclick = () => { closep() }
 
 function closep() {
     menu.style.left = "-50000px";
