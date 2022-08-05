@@ -82,16 +82,12 @@ window.addEventListener("contextmenu", (e) => {
 });
 
 function closeCurrentTab() {
-    if (tabs.length > 1) {
-    if (tabs[currentTab] != "newPage") {
-        $("#" + tabs[currentTab].toString().replace("#", "")).remove();
-    }
+    if (tabs.length > 1 && currentTab > 0) {
     document.getElementsByClassName("tab")[currentTab].remove();
-    tabs = tabs.splice(currentTab, 1);
-    currentTab--;
-    go(currentTab);
+    go(0);
     } else {
-        alert("You can't close the last tab");
+        alert("We are sorry, but you cannot close the last tab.");
+			return false;
     }
 }
 
@@ -102,13 +98,12 @@ $("#newTab").onclick = () => {
     d.className = "tab auto";
     d.innerText = "🧭";
     d.title = "Tab";
-    var t = totaltabs;
     $("#tabs").appendChild(d);
     tabs.push("newPage");
-    d.onclick = () => { go(t) };
-    go(t);
-    totaltabs++;
+    d.onclick = "go(tabs.length-1)";
+    go(tabs.length-1);
     input.focus();
+	totaltabs++;
 }
 
 var input = $("#newPageInputText");
@@ -132,16 +127,19 @@ $("#proxyInp").onsubmit = async (e) => {
 
 currentTab = 0;
 function go(tab) {
+	  if (tabs.length < 2) return;
     for (var i = 0; i < tabs.length; i++) {
-				if ($("#" + tabs[i].toString().replace("#", ""))) {
+				if (tabs[i]) {
         	$("#" + tabs[i].toString().replace("#", "")).style.display="none";
 				}
     }
+	if (tabs[tab]) {
 	var frame = 
     $("#" + tabs[tab].toString().replace("#", ""));
 		frame.style.display="initial";
     frame.focus();
-    currentTab = tab;
+		currentTab = tab;
+	}
 }
 
 function goTo(id) {
@@ -161,12 +159,10 @@ function createGameTab(src, title) {
     d.className = "tab auto";
     d.innerText = "🎮";
     d.title = title || "Tab";
-    var t = totaltabs;
     $("#tabs").appendChild(d);
     tabs.push("newPage");
-    d.onclick = () => { go(t) };
-    go(t);
-    totaltabs++;
+    d.onclick = () => { go(totaltabs.length-1) };
+    go(tabs.length-1);
     var frame = document.createElement("iframe");
     frame.src = src;
     input.value = "";
@@ -175,6 +171,7 @@ function createGameTab(src, title) {
     frame.id = "page" + currentTab;
     $("#main").appendChild(frame);
     tabs[currentTab] = frame.id.toString();
+		totaltabs++;
     frame.focus();
 }
 
