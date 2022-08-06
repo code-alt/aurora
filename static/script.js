@@ -1,4 +1,3 @@
-
 function $(id) {
     return document.querySelector(id);
 }
@@ -61,6 +60,7 @@ window.onclick = () => { closep() }
 
 function closep() {
     menu.style.left = "-50000px";
+		$("#" + tabs[currentTab].toString().replace("#", "")).focus();
 }
 
 function removeLet(str) {
@@ -84,7 +84,11 @@ window.addEventListener("contextmenu", (e) => {
 function closeCurrentTab() {
     if (tabs.length > 1 && currentTab > 0) {
     document.getElementsByClassName("tab")[currentTab].remove();
-    go(0);
+		$("#" + tabs[currentTab].toString().replace("#", "")).remove();
+		tabs.splice(currentTab, 1);
+		totaltabs--;
+    go(currentTab - 1);
+		$("#" + tabs[currentTab].toString().replace("#", "")).focus();
     } else {
         alert("We are sorry, but you cannot close the last tab.");
 			return false;
@@ -92,7 +96,7 @@ function closeCurrentTab() {
 }
 
 
-var totaltabs = 1;
+var totaltabs = 0;
 $("#newTab").onclick = () => {
     var d = document.createElement("div");
     d.className = "tab auto";
@@ -100,10 +104,11 @@ $("#newTab").onclick = () => {
     d.title = "Tab";
     $("#tabs").appendChild(d);
     tabs.push("newPage");
-    d.onclick = "go(tabs.length-1)";
-    go(tabs.length-1);
+		totaltabs++;
+	  var t = totaltabs;
+    d.onclick = () => { go(t) };
+    go(t);
     input.focus();
-	totaltabs++;
 }
 
 var input = $("#newPageInputText");
@@ -114,7 +119,10 @@ $("#proxyInp").onsubmit = async (e) => {
         scope: __uv$config.prefix
     }).then(() => {
         var frame = document.createElement("iframe");
-        frame.src = __uv$config.prefix + __uv$config.encodeUrl("https://" + input.value.replace("https://", "").trim());
+				let url = input.value.trim();
+        if (!isUrl(url)) url = 'https://duckduckgo.com/?kae=d&q=' + url;
+        else if (!(url.startsWith('https://') || url.startsWith('http://'))) url = 'https://' + url;
+        frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
         input.value = "";
         frame.className = "page";
         frame.zIndex = "50";
@@ -125,7 +133,13 @@ $("#proxyInp").onsubmit = async (e) => {
 	}
 }
 
-currentTab = 0;
+function isUrl(val = ''){
+    if (/^http(s?):\/\//.test(val) || val.includes('.') && val.substr(0, 1) !== ' ') return true;
+    return false;
+};
+
+var currentTab = 0;
+var currentFrame = tabs[0];
 function go(tab) {
 	  if (tabs.length < 2) return;
     for (var i = 0; i < tabs.length; i++) {
@@ -139,6 +153,7 @@ function go(tab) {
 		frame.style.display="initial";
     frame.focus();
 		currentTab = tab;
+		currentFrame = tabs[currentTab];
 	}
 }
 
@@ -161,8 +176,9 @@ function createGameTab(src, title) {
     d.title = title || "Tab";
     $("#tabs").appendChild(d);
     tabs.push("newPage");
-    d.onclick = () => { go(totaltabs.length-1) };
-    go(tabs.length-1);
+	  var t = totaltabs;
+    d.onclick = () => { go(t + 1) };
+    go(t + 1);
     var frame = document.createElement("iframe");
     frame.src = src;
     input.value = "";
@@ -179,7 +195,7 @@ var games = [["2048", "/2048"], ["Astray", "/astray"], ["Breaklock", "/breaklock
 
 for (var i = 0; i < games.length; i++) {
     let elem = document.createElement("a");
-    elem.href = "javascript:createGameTab('/games/" + games[i][1] + "', 'Game')";
+    elem.href = "javascript:createGameTab('/games/" + games[i][1] + "/', 'Game')";
     elem.innerText = games[i][0];
     $("#gameList").innerHTML = $("#gameList").innerHTML + elem.outerHTML + "<br />";
 }
