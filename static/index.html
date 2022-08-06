@@ -16,10 +16,13 @@
     </head>
     <body>
         <div id="cm">
-            <button class="option" onclick="closeCurrentTab();closep();">Close Tab</butto>
-            <button class="option" onclick="document.getElementById('newTab').click();closep();">Add Tab</button>
-            <button class="option" onclick="goTo('games');closep();">Games</button>
-            <button class="option" onclick="goTo('settings');closep();">Settings</button>
+            <button class="option" onclick="closeCurrentTab();">Close Tab</butto>
+            <button class="option" onclick="document.getElementById('newTab').click();">Add Tab</button>
+            <button class="option" onclick="goTo('games');">Games</button>
+            <button class="option" onclick="goTo('settings');">Settings</button>
+						<button class="option" onclick='if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).location.reload();}'>Reload</button>
+						<button class="option" onclick='if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).history.back();}'>Back</button>
+						<button class="option" onclick='if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).history.forward();}'>Forward</button>
         </div>
         <div id="start">
             <div id="loadText">Loading...</div>
@@ -34,9 +37,16 @@
             </div>
             <div id="settings" class="pane">
                 <div class="txt">
+										<p>We have more to come, check back later!</p>
                     <a href="javascript:closeCurrentTab();closePane();">Close current Tab</a>
-		    <br />
-		    <a href="javascript:cloak();">Cloak Tab</a>
+										<br />
+										<a href="javascript:cloak();">Cloak Tab</a>
+										<br />
+										<p>Navigation (This will be in a URL bar in the future)</p>
+										<a href='javascript:if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).history.back();}'>Back 🠨</a><br />
+										<a href='javascript:if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).history.forward();}'>Forwards 🠪</a><br />
+										<a href='javascript:if($("#" + tabs[currentTab].toString().replace("#", "")).tagName == "IFRAME"){($("#" + tabs[currentTab].toString().replace("#", "")).contentWindow || $("#" + tabs[currentTab].toString().replace("#", "")).contentDocument).location.reload();}'>Reload ↻</a>
+	<!-- 	Emojis for use: 🠨 ↻ 🠪	 -->
                 </div>
             </div>
         </div>
