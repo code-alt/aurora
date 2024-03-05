@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/code-alt/altdevs.xyz#readme",
   "dependencies": {
-    "@tomphttp/bare-server-node": "^1.0.3-deps2",
+    "@tomphttp/bare-server-node": "^2.0.2",
     "node-static": "^0.7.11"
   }
 }
